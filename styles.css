@@ -1,49 +1,27 @@
 body {
     font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     margin: 0;
     background-color: #f0f0f0;
 }
 
 .container {
-    text-align: center;
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.video-container {
-    width: 100%;
-    max-width: 600px;
-    margin-bottom: 10px;
-}
-
-video {
-    width: 100%;
-}
-
-.controls {
     display: flex;
+    height: 100vh;
+    align-items: center;
     justify-content: center;
-    gap: 10px;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-input[type="range"] {
-    width: 100px;
 }
 
 .video-list {
-    margin-top: 20px;
+    width: 200px;
+    background: #fff;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+    height: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.video-list h2 {
+    margin-top: 0;
 }
 
 .video-list ul {
@@ -62,4 +40,39 @@ input[type="range"] {
 
 .video-list li:hover {
     background: #ddd;
+}
+
+.video-container {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+    background: #fff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+video {
+    width: 100%;
+    max-width: 800px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+input[type="range"] {
+    width: 100px;
 }
