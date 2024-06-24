@@ -9,16 +9,27 @@
 <body>
     <div class="container">
         <h1>Video Streaming App</h1>
-        <video id="videoPlayer" controls>
-            <source src="sample-video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+        <div class="video-container">
+            <video id="videoPlayer" controls>
+                <source src="video1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
         <div class="controls">
             <button onclick="playPause()">Play/Pause</button>
             <button onclick="stopVideo()">Stop</button>
             <button onclick="skip(-10)">Rewind 10s</button>
             <button onclick="skip(10)">Forward 10s</button>
             <input type="range" id="volumeSlider" min="0" max="1" step="0.01" onchange="setVolume(this.value)">
+        </div>
+        <div class="video-list">
+            <h2>Video List</h2>
+            <ul>
+                <li onclick="changeVideo('video1.mp4')">Video 1</li>
+                <li onclick="changeVideo('video2.mp4')">Video 2</li>
+                <li onclick="changeVideo('video3.mp4')">Video 3</li>
+                <li onclick="changeVideo('video4.mp4')">Video 4</li>
+            </ul>
         </div>
     </div>
     <script src="script.js"></script>

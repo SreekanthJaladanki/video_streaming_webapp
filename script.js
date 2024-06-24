@@ -20,3 +20,8 @@ function skip(value) {
 function setVolume(value) {
     video.volume = value;
 }
+
+function changeVideo(videoSrc) {
+    video.src = videoSrc;
+    video.play();
+}
