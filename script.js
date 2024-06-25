@@ -1,4 +1,5 @@
 const video = document.getElementById('videoPlayer');
+let currentVideoElement = null;
 
 function playPause() {
     if (video.paused) {
@@ -21,7 +22,14 @@ function setVolume(value) {
     video.volume = value;
 }
 
-function changeVideo(videoSrc) {
+function changeVideo(videoSrc, elementId) {
     video.src = videoSrc;
+    currentVideoElement = document.getElementById(elementId);
     video.play();
+}
+
+function markAsWatched() {
+    if (currentVideoElement) {
+        currentVideoElement.classList.add('watched');
+    }
 }
