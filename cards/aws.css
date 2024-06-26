@@ -69,7 +69,8 @@ body {
 }
 
 .video-container h1 {
-    color: #34495e;
+    color: #000000;
+    font-weight: bolder;
 }
 
 video {
