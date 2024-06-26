@@ -1,5 +1,6 @@
 const video = document.getElementById('videoPlayer');
-let currentVideoElement = null;
+const videoList = document.getElementById('videoList').getElementsByTagName('li');
+let currentVideoIndex = -1;
 
 function playPause() {
     if (video.paused) {
@@ -25,11 +26,30 @@ function setVolume(value) {
 function changeVideo(videoSrc, elementId) {
     video.src = videoSrc;
     currentVideoElement = document.getElementById(elementId);
+    currentVideoIndex = Array.prototype.indexOf.call(videoList, currentVideoElement);
     video.play();
 }
 
 function markAsWatched() {
     if (currentVideoElement) {
         currentVideoElement.classList.add('watched');
+    }
+}
+
+function nextVideo() {
+    if (currentVideoIndex < videoList.length - 1) {
+        currentVideoIndex++;
+        const nextVideoElement = videoList[currentVideoIndex];
+        const videoSrc = nextVideoElement.getAttribute('onclick').match(/'(.*?)'/)[1];
+        changeVideo(videoSrc, nextVideoElement.id);
+    }
+}
+
+function prevVideo() {
+    if (currentVideoIndex > 0) {
+        currentVideoIndex--;
+        const prevVideoElement = videoList[currentVideoIndex];
+        const videoSrc = prevVideoElement.getAttribute('onclick').match(/'(.*?)'/)[1];
+        changeVideo(videoSrc, prevVideoElement.id);
     }
 }
