@@ -1,6 +1,7 @@
 const video = document.getElementById('videoPlayer');
 const videoList = document.getElementById('videoList').getElementsByTagName('li');
 let currentVideoIndex = -1;
+let currentVideoElement = null;
 
 function playPause() {
     if (video.paused) {
@@ -52,4 +53,9 @@ function prevVideo() {
         const videoSrc = prevVideoElement.getAttribute('onclick').match(/'(.*?)'/)[1];
         changeVideo(videoSrc, prevVideoElement.id);
     }
+}
+
+function updateProgress() {
+    const percentage = Math.floor((video.currentTime / video.duration) * 100);
+    document.getElementById('progress').innerText = `${percentage}% watched`;
 }
