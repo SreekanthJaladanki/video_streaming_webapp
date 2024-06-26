@@ -35,20 +35,20 @@ main {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     text-align: center;
-    padding: 1rem;
+    padding: 0;
     transition: transform 0.2s, box-shadow 0.2s;
     cursor: pointer;
+    height: 200px;
+    width: 200px;
+}
+
+.card img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 
 .card:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.card h2 {
-    margin-top: 0;
-}
-
-.card p {
-    margin: 0.5rem 0;
 }
