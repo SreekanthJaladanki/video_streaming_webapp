@@ -3,41 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to the DevOps Team</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Video App Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 300px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+    </style>
+
 </head>
 <body>
-    <header>
-        <h1>Welcome to the DevOps Team</h1>
-    </header>
-    <main>
-        <div class="card-container">
-            <div class="card" onclick="location.href='cards/aws.html';">
-                <img src="/assets/aws_logo.png" alt="AWS">
-            </div>
-            <div class="card" onclick="location.href='#';">
-                <img src="/assets/git_logo.png" alt="GIT">
-            </div>
-            <div class="card" onclick="location.href='#';">
-                <img src="/assets/linux_logo.png" alt="Projects">
-            </div>
-            <div class="card" onclick="location.href='#';">
-                <img src="/assets/shell_logo.png"Tools">
-            </div>
-            <div class="card" onclick="location.href='#';">
-                <img src="/assets/jenkins_logo.png" alt="Best Practices">
-            </div>
-            <div class="card" onclick="location.href='#';">
-                <img src="/assets/docker_logo.png" alt="Documentation">
-            </div>
-            <div class="card" onclick="location.href='#';">
-                <img src="/assets/kubernetes.png" alt="Training">
-            </div>
-            <div class="card" onclick="location.href='#';">
-                <img src="image8.jpg" alt="Contacts">
-            </div>
-        </div>
-    </main>
-    <script src="scripts.js"></script>
+    <h2>Login</h2>
+    <form id="loginForm">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <h2>Register</h2>
+    <form id="registerForm">
+        <input type="text" id="regUsername" placeholder="Username" required>
+        <input type="password" id="regPassword" placeholder="Password" required>
+        <button type="submit">Register</button>
+    </form>
+
+    <script>
+        document.getElementById('loginForm').onsubmit = async function(event) {
+            event.preventDefault();
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    username: document.getElementById('username').value,
+                    password: document.getElementById('password').value
+                })
+            });
+            const data = await response.json();
+            alert(data.message);
+        };
+
+        document.getElementById('registerForm').onsubmit = async function(event) {
+            event.preventDefault();
+            const response = await fetch('/register', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    username: document.getElementById('regUsername').value,
+                    password: document.getElementById('regPassword').value
+                })
+            });
+            const data = await response.json();
+            alert(data.message);
+        };
+    </script>
 </body>
 </html>
