@@ -36,7 +36,7 @@ body {
 }
 
 .video-list {
-    flex: 1;
+    flex: 0.3; /* Reduced from 1 to 0.3 */
     margin-right: 20px;
     background-color: #fff;
     border-radius: 10px;
@@ -74,7 +74,7 @@ body {
 }
 
 .video-container {
-    flex: 2;
+    flex: 0.7; /* Increased from 2 to 0.7 to adjust proportionately */
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
