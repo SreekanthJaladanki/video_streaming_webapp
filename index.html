@@ -15,7 +15,19 @@
             <button type="submit">Login</button>
         </form>
     </div>
-
+    <header>
+        <h1>Welcome to the DevOps Team</h1>
+        <button onclick="logout()">Logout</button>
+    </header>
+    
+    <script>
+    function logout() {
+        fetch('/logout', { method: 'POST' }).then(() => {
+            window.location.href = '/';
+        });
+    }
+    </script>
+    
     <script>
         document.getElementById('loginForm').onsubmit = async function(event) {
             event.preventDefault();

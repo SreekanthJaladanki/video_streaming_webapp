@@ -1,43 +1,68 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const bcrypt = require('bcryptjs');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-// Predefined users (normally you'd use a database)
-const users = {
-    'admin': { password: bcrypt.hashSync('password123', 10) }  // hashed for security
-};
-
-app.use(bodyParser.urlencoded({ extended: true }));
+// Middleware
 app.use(bodyParser.json());
+app.use(express.static('public'));
 app.use(session({
-    secret: 'your_secret_key',
+    secret: 'your-secret-key',
     resave: false,
-    saveUninitialized: false,
-    cookie: { secure: false }
+    saveUninitialized: true,
 }));
 
+// Dummy user data
+const users = {
+    user1: { username: 'user1', password: 'password1' },
+    // Add more users as needed
+};
+
+// Login endpoint
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
     const user = users[username];
-
-    if (user && bcrypt.compareSync(password, user.password)) {
-        req.session.user = username;  // set the username in session
-        res.redirect('/home');
+    if (user && user.password === password) {
+        req.session.user = user;
+        res.json({ message: 'Login successful' });
     } else {
-        res.status(401).send('Invalid credentials');
+        res.status(401).json({ message: 'Invalid credentials' });
     }
 });
 
+// Serve home.html after successful login
 app.get('/home', (req, res) => {
     if (req.session.user) {
-        res.sendFile(__dirname + '/home.html');  // send the homepage if logged in
+        res.sendFile(__dirname + '/public/home.html');
     } else {
         res.redirect('/');
     }
 });
 
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
+// Logout endpoint
+app.post('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.status(500).json({ message: 'Logout failed' });
+        }
+        res.redirect('/');
+    });
+});
+// Middleware to protect routes
+function isAuthenticated(req, res, next) {
+    if (req.session.user) {
+        return next();
+    } else {
+        res.redirect('/');
+    }
+}
+
+// Use middleware for protected routes
+app.get('/home', isAuthenticated, (req, res) => {
+    res.sendFile(__dirname + '/public/home.html');
+});
