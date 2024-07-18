@@ -19,6 +19,7 @@ body {
     cursor: pointer;
     font-size: 1rem;
     transition: background-color 0.2s, color 0.2s;
+    z-index: 1000; /* Ensure the button is on top of other elements */
 }
 
 .back-button:hover {
@@ -33,6 +34,7 @@ body {
     padding: 20px;
     width: 100%;
     box-sizing: border-box;
+    margin-top: 70px; /* Add margin to avoid overlap with fixed button */
 }
 
 .video-list {
